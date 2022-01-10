@@ -38,6 +38,10 @@ for number in range(total_number):
     # You can check out what the meter provides by looking at dss.meters_register_names()
     total_energy_kwh_list.append(dss.meters_register_values()[0])
 
+    # https://sourceforge.net/p/electricdss/discussion/861977/thread/9d4b9bf548/?limit=25#c820
+    dss.text(f"set casename={number}")
+    dss.text("show voltage")
+
 
 plt.scatter(x=number_list, y=total_energy_kwh_list)
 
