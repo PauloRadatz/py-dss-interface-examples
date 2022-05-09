@@ -31,6 +31,6 @@ dss.meters_write_name("my_meter")
 register_names = dss.meters_register_names()
 register_values = dss.meters_register_values()
 
-# When you run it, you will see the results printed in the consule
-for register, value in list(zip(register_names, register_values)):
+# When you run it, you will see the results printed in the console
+for register, value in zip(register_names, register_values):
     print(f"{register}: {value}")
