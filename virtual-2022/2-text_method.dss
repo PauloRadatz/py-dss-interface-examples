@@ -1,0 +1,8 @@
+ClearAll
+
+compile "C:\PauloRadatz\GitHub\py-dss-interface-examples\feeders\123Bus\IEEE123Master.dss"
+solve
+
+show Voltage LN Nodes
+
+export voltages
