@@ -1,0 +1,1 @@
+New "Transformer.reg1a" phases=3 windings=2 buses=[150, 150r, ] conns=[wye, wye, ] kVs=[4.16, 4.16, ] kVAs=[5000, 5000, ] XHL=0.001 %loadloss=1E-005 ppm_antifloat=0

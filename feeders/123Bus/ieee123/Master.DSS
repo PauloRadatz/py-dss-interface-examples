@@ -1,0 +1,32 @@
+Clear
+New Circuit.ieee123
+
+
+Redirect Vsource.dss
+Redirect LineCode.DSS
+Redirect LoadShape.DSS
+Redirect GrowthShape.DSS
+Redirect TCC_Curve.DSS
+Redirect Spectrum.DSS
+Redirect feeder\Branches.dss
+Redirect feeder\Transformers.dss
+Redirect feeder\Loads.dss
+Redirect feeder\Generators.dss
+Redirect feeder\Capacitors.dss
+Redirect Line.DSS
+Redirect Transformer.DSS
+Redirect RegControl.DSS
+Redirect EnergyMeter.DSS
+MakeBusList
+Redirect BusVoltageBases.dss  ! set voltage bases
+Buscoords buscoords.dss
+GIScoords GIScoords.dss
+
+
+New energymeter.m Line.L115 1 phasevoltagereport=yes
+!reprocessbuses
+set mode=yearly number=1
+set demandinterval=True
+set diverbose=true
+solve
+closedi

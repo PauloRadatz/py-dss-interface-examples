@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 # @Time    : 8/23/2022 8:09 AM
 # @Author  : Paulo Radatz
 # @Email   : pradatz@epri.com
@@ -22,4 +22,6 @@ dss.text("solve")
 dss.text("show Voltage LN Nodes")
 
 result = dss.text("export voltages")  # Text method returns strings. It could be useful.
+
+dss.text('FormEdit "Line.L1"')
 
