@@ -13,16 +13,16 @@ script_path = os.path.dirname(os.path.abspath(__file__))
 
 dss_file = pathlib.Path(script_path).joinpath("feeders", "13bus", "IEEE13Nodeckt.dss")
 
-dss = py_dss_interface.DSSDLL()
+dss = py_dss_interface.DSS()
 
 dss.text(f"compile [{dss_file}]")
 dss.text("new energymeter.my_meter element=Transformer.Sub terminal=1")
 
 bus_loads = list()
-dss.loads_first()
-for _ in range(dss.loads_count()):
-    bus_loads.append(dss.cktelement_read_bus_names()[0].split(".")[0])
-    dss.loads_next()
+dss.loads.first()
+for _ in range(dss.loads.count):
+    bus_loads.append(dss.cktelement.bus_names[0].split(".")[0])
+    dss.loads.next()
 
 for bus in bus_loads:
     dss.text(f"AddBusMarker Bus={bus} code=7 color=Red size=10")

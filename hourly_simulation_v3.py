@@ -20,7 +20,7 @@ script_path = os.path.dirname(os.path.abspath(__file__))
 dss_file = pathlib.Path(script_path).joinpath(
     "feeders", "13bus", "IEEE13Nodeckt_com_loadshape.dss")
 
-dss = py_dss_interface.DSSDLL()
+dss = py_dss_interface.DSS()
 
 # Executa 1 de 2: obtém tensão no "node" 670.3 usando monitor
 dss.text(f"compile [{dss_file}]")
@@ -33,7 +33,7 @@ dss.text(f"compile [{dss_file}]")
 
 # cria df de resultados
 df_voltage = pd.DataFrame(
-    index=dss.circuit_all_node_names(),
+    index=dss.circuit.nodes_names,
     columns=[f'hora_{h}' for h in range(24)])
 
 dss.text("set stepsize=1h")
@@ -42,9 +42,9 @@ dss.text("set number=1")
 
 total_number = 24
 for h in range(total_number):
-    dss.solution_solve()
+    dss.solution.solve()
 
-    vri = dss.circuit_all_bus_volts()
+    vri = dss.circuit.buses_volts
     df_voltage[f'hora_{h}'] = [
         (vri[j] + 1j * vri[j+1]) for j in range(0, len(vri), 2)]
 

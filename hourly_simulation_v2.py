@@ -18,7 +18,7 @@ script_path = os.path.dirname(os.path.abspath(__file__))
 dss_file = pathlib.Path(script_path).joinpath(
     "feeders", "13bus", "IEEE13Nodeckt_com_loadshape.dss")
 
-dss = py_dss_interface.DSSDLL()
+dss = py_dss_interface.DSS()
 
 dss.text(f"compile [{dss_file}]")
 
@@ -36,11 +36,11 @@ number_list = list()
 total_energy_kwh_list = list()
 
 for number in range(total_number):
-    dss.solution_solve()
+    dss.solution.solve()
 
     number_list.append(number)
     # You can check out what the meter provides by looking at dss.meters_register_names()
-    total_energy_kwh_list.append(dss.meters_register_values()[0])
+    total_energy_kwh_list.append(dss.meters.register_values[0])
 
     # https://sourceforge.net/p/electricdss/discussion/861977/thread/9d4b9bf548/?limit=25#c820
     dss.text(f"set casename={number}")

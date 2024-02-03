@@ -15,7 +15,7 @@ script_path = os.path.dirname(os.path.abspath(__file__))
 
 dss_file = pathlib.Path(script_path).joinpath("feeders", "13bus", "IEEE13Nodeckt.dss")
 
-dss = py_dss_interface.DSSDLL()
+dss = py_dss_interface.DSS()
 
 dss.text(f"compile [{dss_file}]")
 
@@ -27,9 +27,9 @@ dss.text("set mode=daily")
 dss.text("Solve")
 
 # Read energymeter results
-dss.meters_write_name("my_meter")
-register_names = dss.meters_register_names()
-register_values = dss.meters_register_values()
+dss.meters.name = "my_meter"
+register_names = dss.meters.register_names
+register_values = dss.meters.register_values
 
 # When you run it, you will see the results printed in the console
 for register, value in zip(register_names, register_values):

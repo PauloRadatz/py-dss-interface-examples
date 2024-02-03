@@ -15,7 +15,7 @@ script_path = os.path.dirname(os.path.abspath(__file__))
 
 dss_file = pathlib.Path(script_path).joinpath("feeders", "123Bus", "IEEE123Master.dss")
 
-dss = py_dss_interface.DSSDLL()
+dss = py_dss_interface.DSS()
 
 dss.text(f"set DefaultBaseFrequency=60")
 dss.text(f"compile [{dss_file}]")
@@ -31,8 +31,8 @@ dss.text("set number=500000")
 
 # dss.dssprogress_pct_progress(50)
 
-dss.dssprogress_show()
-dss.dssprogress_pct_progress(50)
-dss.text("solve")
-
-dss.dssprogress_caption(f'Running QSTS simulation')
+# dss.dssprogress_show()
+# dss.dssprogress_pct_progress(50)
+# dss.text("solve")
+#
+# dss.dssprogress_caption(f'Running QSTS simulation')

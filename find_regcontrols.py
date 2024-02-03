@@ -13,18 +13,16 @@ script_path = os.path.dirname(os.path.abspath(__file__))
 
 dss_file = pathlib.Path(script_path).joinpath("feeders", "13bus", "IEEE13Nodeckt.dss")
 
-dss = py_dss_interface.DSSDLL()
+dss = py_dss_interface.DSS()
 
 dss.text(f"compile [{dss_file}]")
 
 reg_control_dict = {}  # Key: transformer name. Value: regcontrol
 
-dss.regcontrols_first()
-for _ in range(dss.regcontrols_count()):
-    reg_control_dict[dss.regcontrols_read_transformer()] = dss.regcontrols_read_name()
+dss.regcontrols.first()
+for _ in range(dss.regcontrols.count):
+    reg_control_dict[dss.regcontrols.transformer] = dss.regcontrols.name
 
-    dss.regcontrols_next()
+    dss.regcontrols.next()
 
 print(reg_control_dict)
-
-print("here")

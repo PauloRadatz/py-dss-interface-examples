@@ -11,22 +11,22 @@ import pathlib
 
 script_path = os.path.dirname(os.path.abspath(__file__))
 
-dss_file = pathlib.Path(script_path).joinpath("../feeders", "123Bus", "IEEE123Master.dss")
+dss_file = pathlib.Path(script_path).joinpath("feeders", "123Bus", "IEEE123Master.dss")
 
-dss = py_dss_interface.DSSDLL()  # using OpenDSS provided in the package
+dss = py_dss_interface.DSS()  # using OpenDSS provided in the package
 dss.text(f"compile [{dss_file}]")
 dss.text("solve")
 
 line_length_dict = dict()
 line_powers_dict = dict()
 
-dss.lines_first()
-for _ in range(dss.lines_count()):
+dss.lines.first()
+for _ in range(dss.lines.count):
     # Line properties
-    line_length_dict[dss.lines_read_name()] = dss.lines_read_length()
+    line_length_dict[dss.lines.name] = dss.lines.length
 
     # Line results
     # dss.circuit_set_active_element(f"line.{dss.lines_read_name()}")
-    line_powers_dict[dss.lines_read_name()] = dss.cktelement_powers()
+    line_powers_dict[dss.lines.name] = dss.cktelement.powers
 
-    dss.lines_next()
+    dss.lines.next()

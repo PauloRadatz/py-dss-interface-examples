@@ -12,7 +12,7 @@ import pathlib
 script_path = os.path.dirname(os.path.abspath(__file__))
 dss_file = pathlib.Path(script_path).joinpath("feeders", "123Bus", "IEEE123Master.dss")
 
-dss = py_dss_interface.DSSDLL()
+dss = py_dss_interface.DSS()
 
 dss.text(f"compile [{dss_file}]")
 dss.text("edit vsource.source pu=1.045")
@@ -28,7 +28,7 @@ while not under_voltage and i < 100:
     dss.text(f"set loadmult={load_mult}")
     dss.text("solve")
 
-    if min(dss.circuit_all_bus_vmag_pu()) < 0.95:
+    if min(dss.circuit.buses_vmag_pu) < 0.95:
         under_voltage = True
         load_mult = 1 + (i - 1) / 100
 

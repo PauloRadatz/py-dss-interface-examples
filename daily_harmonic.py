@@ -15,7 +15,7 @@ script_path = os.path.dirname(os.path.abspath(__file__))
 
 dss_file = pathlib.Path(script_path).joinpath("feeders", "123Bus", "IEEE123Master.dss")
 
-dss = py_dss_interface.DSSDLL()
+dss = py_dss_interface.DSS()
 
 dss.text(f"set DefaultBaseFrequency=60")
 dss.text(f"compile [{dss_file}]")
@@ -45,9 +45,9 @@ for hour in range(24):
     dss.text(f"set hour={hour}")
     dss.text("solve")
 
-    dss.circuit_set_active_element("load.s48")
-    current_hour[1] = dss.cktelement_currents_mag_ang()[0]
-    voltage_hour[1] = dss.cktelement_voltages_mag_ang()[0]
+    dss.circuit.set_active_element("load.s48")
+    current_hour[1] = dss.cktelement.currents_mag_ang[0]
+    voltage_hour[1] = dss.cktelement.voltages_mag_ang[0]
 
     dss.text("set mode=harmonic")
 
@@ -59,10 +59,10 @@ for hour in range(24):
         dss.text(f"set harmonics=[{harmonic}]")
         dss.text("solve")
 
-        dss.circuit_set_active_element("load.s48")
+        dss.circuit.set_active_element("load.s48")
         # Only phase A
-        current_hour[harmonic] = dss.cktelement_currents_mag_ang()[0]
-        voltage_hour[harmonic] = dss.cktelement_voltages_mag_ang()[0]
+        current_hour[harmonic] = dss.cktelement.currents_mag_ang[0]
+        voltage_hour[harmonic] = dss.cktelement.voltages_mag_ang[0]
 
     current[hour + 1] = current_hour
     voltage[hour + 1] = voltage_hour
