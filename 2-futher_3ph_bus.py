@@ -10,7 +10,7 @@ import pathlib
 
 script_path = os.path.dirname(os.path.abspath(__file__))
 
-dss_file = pathlib.Path(script_path).joinpath("../feeders", "123Bus", "IEEE123Master.dss")
+dss_file = pathlib.Path(script_path).joinpath("feeders", "123Bus", "IEEE123Master.dss")
 
 dss = py_dss_interface.DSS()  # using OpenDSS provided in the package
 dss.text(f"compile [{dss_file}]")
