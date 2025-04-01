@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
-# @Time    : 2/10/2022 7:56 AM
 # @Author  : Paulo Radatz
 # @Email   : paulo.radatz@gmail.com
-# @File    : hourly_simulation.py
-# @Software: PyCharm
 
 import py_dss_interface
 import os
